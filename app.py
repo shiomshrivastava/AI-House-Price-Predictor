@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import joblib
 from datetime import datetime
+import os
+import gdown
 
 # ====================== PAGE CONFIG ======================
 st.set_page_config(
@@ -448,7 +450,11 @@ div[data-testid="stHorizontalBlock"] { gap: 0.9rem !important; }
 # ====================== LOAD MODEL ======================
 @st.cache_resource
 def load_model():
-    model    = joblib.load("model.pkl")
+    if not os.path.exists("model.pkl"):
+        url = "https://drive.google.com/uc?id=1ekfB_CHaTcCjUQVtzbKTSiKxBYq6SXcQ"
+        gdown.download(url, "model.pkl", quiet=False)
+
+    model = joblib.load("model.pkl")
     pipeline = joblib.load("pipeline.pkl")
     return model, pipeline
 
