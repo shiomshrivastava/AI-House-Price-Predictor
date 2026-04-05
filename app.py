@@ -451,7 +451,7 @@ div[data-testid="stHorizontalBlock"] { gap: 0.9rem !important; }
 @st.cache_resource
 def load_model():
     if not os.path.exists("model.pkl"):
-        url = "https://drive.google.com/uc?id=1ekfB_CHaTcCjUQVtzbKTSiKxBYq6SXcQ"
+        url = "https://drive.google.com/uc?id=1qQjl456I9H6Cz_kVjMwNOmUXdetxgvl1"
         gdown.download(url, "model.pkl", quiet=False)
 
     model = joblib.load("model.pkl")

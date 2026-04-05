@@ -33,9 +33,9 @@ if not os.path.exists(MODEL_FILE):
     housing = pd.read_csv("housing.csv")
 
     # ✅ Feature Engineering (ADDED)
-    housing["rooms_per_household"] = housing["total_rooms"] / housing["households"]
-    housing["bedrooms_per_room"] = housing["total_bedrooms"] / housing["total_rooms"]
-    housing["population_per_household"] = housing["population"] / housing["households"]
+    housing["rooms_per_household"] = housing["total_rooms"] / housing["households"].replace(0, 1)
+    housing["bedrooms_per_room"] = housing["total_bedrooms"] / housing["total_rooms"].replace(0, 1)
+    housing["population_per_household"] = housing["population"] / housing["households"].replace(0, 1)
 
     housing['income_cat'] = pd.cut(housing["median_income"], 
                                    bins=[0.0, 1.5, 3.0, 4.5, 6.0, np.inf], 
@@ -85,9 +85,9 @@ if not os.path.exists(MODEL_FILE):
     test_data = pd.read_csv("input.csv")
 
     # Apply same feature engineering to test data
-    test_data["rooms_per_household"] = test_data["total_rooms"] / test_data["households"]
-    test_data["bedrooms_per_room"] = test_data["total_bedrooms"] / test_data["total_rooms"]
-    test_data["population_per_household"] = test_data["population"] / test_data["households"]
+    test_data["rooms_per_household"] = test_data["total_rooms"] / test_data["households"].replace(0, 1)
+    test_data["bedrooms_per_room"] = test_data["total_bedrooms"] / test_data["total_rooms"].replace(0, 1)
+    test_data["population_per_household"] = test_data["population"] / test_data["households"].replace(0, 1)
 
     y_test = test_data["median_house_value"].copy()
     X_test = test_data.drop("median_house_value", axis=1)
