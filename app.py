@@ -596,6 +596,23 @@ if st.button("🔮  Predict House Price", type="primary", use_container_width=Tr
         df["bedrooms_per_room"]        = df["total_bedrooms"] / df["total_rooms"].replace(0, 1)
         df["population_per_household"] = df["population"] / df["households"].replace(0, 1)
 
+        # 🔥 FIX: column order match with training
+        final_cols = [
+            'longitude',
+            'latitude',
+            'housing_median_age',
+            'total_rooms',
+            'total_bedrooms',
+            'population',
+            'households',
+            'median_income',
+            'rooms_per_household',
+            'bedrooms_per_room',
+            'population_per_household',
+            'ocean_proximity'
+        ]
+        df = df[final_cols]
+
         # ── Prediction ───────────────────────────────────
         prepared   = pipeline.transform(df)
         prediction = model.predict(prepared)[0]
