@@ -614,6 +614,10 @@ if st.button("🔮  Predict House Price", type="primary", use_container_width=Tr
         df = df[final_cols]
 
         # ── Prediction ───────────────────────────────────
+
+        # IMPORTANT FIX: ensure column order same as training
+        df = df[pipeline.feature_names_in_]
+
         prepared   = pipeline.transform(df)
         prediction = model.predict(prepared)[0]
 
